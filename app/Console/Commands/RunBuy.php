@@ -74,7 +74,7 @@ class RunBuy extends Command {
 
 
     public function handle() {
-        $ip = $_SERVER['SERVER_NAME'];
+
         if ($this->option('debug') == false && Setting::get('autobuyer_status') == '0') {
             $this->info("Autobuyer disabled.");
             return response(['status' => 403]);
@@ -119,7 +119,7 @@ class RunBuy extends Command {
                         'in_use' => '0'
                     ]);
                     if(config('laravel-slack.slack_webhook_url') !== null) {
-                        \Slack::to(config('laravel-slack.default_channel'))->send( $ip . ' has been removed from cooldown!');
+                        \Slack::to(config('laravel-slack.default_channel'))->send( 'IP has been removed from cooldown!');
                     }
                     abort(200);
                 } else {
@@ -137,7 +137,7 @@ class RunBuy extends Command {
                     ]);
                     $this->fut->logout();
                     if(config('laravel-slack.slack_webhook_url') !== null) {
-                        \Slack::to(config('laravel-slack.default_channel'))->send( $ip . ' ' . $this->account->id . ' has been placed in cooldown!');
+                        \Slack::to(config('laravel-slack.default_channel'))->send( 'IP has been placed in cooldown!');
                     }
                     abort(403);
                 }
@@ -276,7 +276,7 @@ class RunBuy extends Command {
                                     } else {
                                         // Found too many auctions
                                         if(config('laravel-slack.slack_webhook_url') !== null) {
-                                            \Slack::to(config('laravel-slack.default_channel'))->send($ip . ' has found too many players. Check if price is correct.');
+                                            \Slack::to(config('laravel-slack.default_channel'))->send('IP has found too many players. Check if price is correct.');
                                         }
                                     }
                                 }
@@ -310,7 +310,7 @@ class RunBuy extends Command {
                     'in_use' => '0'
                 ]);
                 if(config('laravel-slack.slack_webhook_url') !== null) {
-                    \Slack::to(config('laravel-slack.default_channel'))->send( $ip . ' ' . $this->account->id . ' has caught an exception! - ' . $error['reason']);
+                    \Slack::to(config('laravel-slack.default_channel'))->send( 'IP has caught an exception! - ' . $error['reason']);
                 }
             }
 
@@ -408,7 +408,7 @@ class RunBuy extends Command {
             ]);
 
             if(config('laravel-slack.slack_webhook_url') !== null) {
-                \Slack::to(config('laravel-slack.default_channel'))->send( $ip .' ' . $this->account->id . ' has caught an exception! - ' . $error['reason']);
+                \Slack::to(config('laravel-slack.default_channel'))->send('IP has caught an exception! - ' . $error['reason']);
             }
 
             Log::info('We caught an exception in the sort item list! '.$error['reason']);
