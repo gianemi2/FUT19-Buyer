@@ -152,6 +152,10 @@ class Players extends CrudController
         return parent::storeCrud();
     }
 
+    public function update(UpdateRequest $request) {
+        return parent::updateCrud();
+    }
+
     private function unique_multidim_array($array, $key) {
         $temp_array = array();
         $i = 0;
