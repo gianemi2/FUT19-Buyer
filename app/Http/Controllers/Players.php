@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Players as StoreRequest;
+use App\Http\Requests\UpdatePlayers as UpdateRequest;
+
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Helpers\FUTBIN;
 use App\Models\Players as PlayersModel;
@@ -20,7 +22,6 @@ class Players extends CrudController
         $this->crud->setModel("App\Models\Players");
         $this->crud->setRoute("admin/players");
         $this->crud->setEntityNameStrings('Players', 'Player');
-        $this->crud->removeButton('update');
         $this->crud->setColumns([
             [
                 'name' => 'name',
@@ -43,45 +44,9 @@ class Players extends CrudController
                 }
             ],
             [
-                'name' => 'xb_buy_bin',
-                'label' => 'Xbox Buy',
-                'type' => 'closure',
-                'function' => function($entry) {
-                    return number_format($entry->xb_buy_bin);
-                }
-            ],
-            [
-                'name' => 'xb_sell_bin',
-                'label' => 'Xbox Sell',
-                'type' => 'closure',
-                'function' => function($entry) {
-                    return number_format($entry->xb_sell_bin);
-                }
-            ],
-            [
-                'name' => 'pc_buy_bin',
-                'label' => 'PC Buy',
-                'type' => 'closure',
-                'function' => function($entry) {
-                    return number_format($entry->pc_buy_bin);
-                }
-            ],
-            [
-                'name' => 'pc_sell_bin',
-                'label' => 'PC Sell',
-                'type' => 'closure',
-                'function' => function($entry) {
-                    return number_format($entry->pc_sell_bin);
-                }
-            ],
-            [
                 'label' => 'Today Profit',
                 'type' => 'model_function',
                 'function_name' => 'getProfitToday'
-            ],
-            [
-                'name' => 'last_price_update',
-                'label' => 'Last Update'
             ]
         ]);
         $this->crud->addField([
@@ -90,6 +55,24 @@ class Players extends CrudController
             'attributes' => [
                 'placeholder' => 'Start to type for the dropdown to appear',
                 'id' => 'player_search'
+            ]
+        ]);
+        $this->crud->addField([
+            'name' => 'ps_buy_bin',
+            'label' =>  'Prezzo acquisto',
+            'type' => 'text'
+        ]);
+        $this->crud->addField([
+            'name' => 'ps_sell_bin',
+            'label' =>  'Prezzo vendita',
+            'type' => 'text'
+        ]);
+        $this->crud->addField([
+            'name' => 'auto_pricing',
+            'type' => 'radio',
+            'options'    =>  [
+                '0' => 'No',
+                '1' =>  'Si'
             ]
         ]);
         $this->crud->addField([
