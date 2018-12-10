@@ -84,7 +84,7 @@ class SettingsTableSeeder extends Seeder
         [
             'key'           => 'telegram_id',
             'name'          => 'Telegram Id',
-            'description'   => 'Telegram chat id for notification',
+            'description'   => 'Telegram chat id for notification. Separate it with a comma for use notification and silent channel. First should be with sound and second without it.',
             'value'         => '',
             'field'         => '{"name":"value","label":"Value", "title":"Telegram id" ,"type":"text"}',
             'active'        => 1,
