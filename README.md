@@ -4,6 +4,17 @@
 
 [FUT19 Buyer](https://github.com/InkedCurtis/FUT19-Buyer) is a simplistic FIFA 19 Autobuyer coded using the Laravel 5 Framework alongside the Backpack package.
 
+This is a fork of (wonderful, give him a star) InkedCurtis work. This is not a supported fork, just something which I use for keep updated all of my bot at once. 
+It has something new but does not have all new InkedCurtis private upgrade. 
+
+## What's New
+
+* Telegram Notification for use a channel with sound and one with not. Search how to get BOT TOKEN and CHAT ID. 
+* Notification when bot finds too many players. 
+* Set auto sell or just save cards in tradepile. Useful for market crashes.
+* Set account name for better notification.
+* Get list of most used players in a specified SBC. Just go to `YOUR_IP/used?sbc=LINK_TO_SBC_LIST`. For example `http://YOUR_IP/used?sbc=https://www.futbin.com/squad-building-challenges/ALL/544/Layvin%20Kurzawa`.
+
 ## Private Repository
 
 As from today 31st October this repository will no longer be maintained; if you want access to the newly maintained private repository with advanced features such as Chemistry Cards, Position Cards, Private Support, Daily Maintenance & lots more you can purchase this for a one time fee of ~~£25 GBP~~ £15 GBP (Black Friday ONLY!)
@@ -36,6 +47,10 @@ Inserted 8 records.
 Database seeding completed successfully.
 no crontab for root
 ```
+* Open .ENV and add in last line `TELEGRAM_BOT_TOKEN=YOUR BOT TOKEN ID`
+* Go to the server ip created with digitalocean. 
+* Create an account and log in. 
+* Go to settings and insert your telegram chat id credentials.
 
 ## Screenshots
 
