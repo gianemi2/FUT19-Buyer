@@ -232,21 +232,29 @@ class RunBuy extends Command {
                                     sleep($sleep_time);
                                     $randomBid = rand(14000000, 15000000);
                                     $formattedBid = floor($randomBid / 1000) * 1000;
-                                    if($player->position !== 'Training'){
-                                        $type = 'player';
-                                    } else {
+                                    $league = null;
+                                    $player_id = $player->resource_id;
+                                    if($player->position == 'Training'){
                                         $type = 'training';
+                                    } elseif($player->name == 'Icon') {
+                                        $type = 'player';
+                                        $league = 112658;
+                                        $player_id = null;
+                                    } else{
+                                        $type = 'player';
                                     }
                                     $search = $this->fut->searchAuctions(
                                         $type,
                                         null,
                                         null,
-                                        $player->resource_id,
+                                        $player_id,
                                         null,
                                         null,
                                         $formattedBid,
                                         null,
-                                        $buy_bin
+                                        $buy_bin,
+                                        null,
+                                        $league
                                     );
 
                                     if(!empty($search['auctionInfo'])) {
