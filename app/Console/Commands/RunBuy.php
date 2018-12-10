@@ -74,6 +74,7 @@ class RunBuy extends Command {
 
 
     public function handle() {
+
         if ($this->option('debug') == false && Setting::get('autobuyer_status') == '0') {
             $this->info("Autobuyer disabled.");
             return response(['status' => 403]);
@@ -118,7 +119,7 @@ class RunBuy extends Command {
                         'in_use' => '0'
                     ]);
                     if(config('laravel-slack.slack_webhook_url') !== null) {
-                        \Slack::to(config('laravel-slack.default_channel'))->send('Account #' . $this->account->id . ' has been removed from cooldown!');
+                        \Slack::to(config('laravel-slack.default_channel'))->send( 'IP has been removed from cooldown!');
                     }
                     abort(200);
                 } else {
@@ -136,7 +137,7 @@ class RunBuy extends Command {
                     ]);
                     $this->fut->logout();
                     if(config('laravel-slack.slack_webhook_url') !== null) {
-                        \Slack::to(config('laravel-slack.default_channel'))->send('Account #' . $this->account->id . ' has been placed in cooldown!');
+                        \Slack::to(config('laravel-slack.default_channel'))->send( 'IP has been placed in cooldown!');
                     }
                     abort(403);
                 }
@@ -245,33 +246,37 @@ class RunBuy extends Command {
                                 );
 
                                 if(!empty($search['auctionInfo'])) {
-                                    foreach($search['auctionInfo'] as $auction) {
-                                        $bids++;
-                                        $auctions++;
-                                        try {
-                                            $bid = $this->fut->bid($auction['tradeId'], $auction['buyNowPrice']);
-                                            if(isset($bid['auctionInfo'])) {
-                                                Log::notice('We won an auction for ' . $player->name . ' & bought him for ' . $auction['buyNowPrice']);
-                                                $auctionsWon++;
-                                                $transaction = Transactions::insertGetId([
-                                                    'player_id' => $player->id,
-                                                    'card_id' => $auction['itemData']['id'],
-                                                    'buy_bin' => $auction['buyNowPrice'],
-                                                    'account_id' => $this->account->id,
-                                                    'platform' => $this->account->platform,
-                                                    'bought_time' => new Carbon
-                                                ]);
-                                                if(config('laravel-slack.slack_webhook_url') !== null) {
-                                                    \Slack::to(config('laravel-slack.default_channel'))->send('An auction was just won for '.$player->name.' & was bought at '.$auction['buyNowPrice'].' with a potential profit of '.number_format(round(($sell_bin *0.95) - $auction['buyNowPrice'])));
+                                    if(count($search['auctionInfo']) < 4) {
+                                        foreach($search['auctionInfo'] as $auction) {
+                                            $bids++;
+                                            $auctions++;
+                                            try {
+                                                $bid = $this->fut->bid($auction['tradeId'], $auction['buyNowPrice']);
+                                                if(isset($bid['auctionInfo'])) {
+                                                    Log::notice('We won an auction for ' . $player->name . ' & bought him for ' . $auction['buyNowPrice']);
+                                                    $auctionsWon++;
+                                                    $transaction = Transactions::insertGetId([
+                                                        'player_id' => $player->id,
+                                                        'card_id' => $auction['itemData']['id'],
+                                                        'buy_bin' => $auction['buyNowPrice'],
+                                                        'account_id' => $this->account->id,
+                                                        'platform' => $this->account->platform,
+                                                        'bought_time' => new Carbon
+                                                    ]);
+                                                    event(new CardPurchase(Transactions::find($transaction)));
                                                 }
-                                                event(new CardPurchase(Transactions::find($transaction)));
+                                            } catch (FutError $e) {
+                                                $error = $e->GetOptions();
+                                                Log::notice('We caught an exception when trying to bid? '.print_r($error, true));
+                                                Log::notice('The status response we got from the auction was: '.print_r($this->status, true));
+                                                Log::notice('We failed to buy the auction for '.$player->name.' after attempting to buy him for '.$auction['buyNowPrice']);
+                                                $auctionsFailed++;
                                             }
-                                        } catch (FutError $e) {
-                                            $error = $e->GetOptions();
-                                            Log::notice('We caught an exception when trying to bid? '.print_r($error, true));
-                                            Log::notice('The status response we got from the auction was: '.print_r($this->status, true));
-                                            Log::notice('We failed to buy the auction for '.$player->name.' after attempting to buy him for '.$auction['buyNowPrice']);
-                                            $auctionsFailed++;
+                                        }
+                                    } else {
+                                        // Found too many auctions
+                                        if(config('laravel-slack.slack_webhook_url') !== null) {
+                                            \Slack::to(config('laravel-slack.default_channel'))->send('IP has found too many players. Check if price is correct.');
                                         }
                                     }
                                 }
@@ -305,7 +310,7 @@ class RunBuy extends Command {
                     'in_use' => '0'
                 ]);
                 if(config('laravel-slack.slack_webhook_url') !== null) {
-                    \Slack::to(config('laravel-slack.default_channel'))->send('Account #' . $this->account->id . ' has caught an exception! - ' . $error['reason']);
+                    \Slack::to(config('laravel-slack.default_channel'))->send( 'IP has caught an exception! - ' . $error['reason']);
                 }
             }
 
@@ -382,9 +387,6 @@ class RunBuy extends Command {
                     $trade->save();
                     $this->requests++;
                     event(new CardSold(Transactions::find($trade->id)));
-                    if(config('laravel-slack.slack_webhook_url') !== null) {
-                        \Slack::to(config('laravel-slack.default_channel'))->send($trade->player->name.' was sold at '.$auction['currentBid'].' with a profit of '.number_format(round(($auction['currentBid'] *0.95) - $trade->buy_bin)));
-                    }
                     unset($tradepile['auctionInfo'][$key]);
                 }
                 sleep(rand(1,3));
@@ -406,7 +408,7 @@ class RunBuy extends Command {
             ]);
 
             if(config('laravel-slack.slack_webhook_url') !== null) {
-                \Slack::to(config('laravel-slack.default_channel'))->send('Account #' . $this->account->id . ' has caught an exception! - ' . $error['reason']);
+                \Slack::to(config('laravel-slack.default_channel'))->send('IP has caught an exception! - ' . $error['reason']);
             }
 
             Log::info('We caught an exception in the sort item list! '.$error['reason']);
