@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('buy:cron')->everyMinute();
         $schedule->command('fix_accounts:cron')->everyFiveMinutes();
         $schedule->command('update_prices:cron')->everyMinute();
-        $schedule->command('reports:cron')->everyThirtyMinutes();
+        $schedule->command('reports:cron')->hourly();
     }
 
     /**

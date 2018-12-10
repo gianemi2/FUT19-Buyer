@@ -90,7 +90,7 @@ class SBCPurchase extends Command {
                         $this->cards['players'][] = [
                             'prices' => [
                                 'xbox' => $player_card->attr('data-price-xbl'),
-                                'ps' => $player_card->attr('data-price-ps3'),
+                                'ps' => $player_card->attr('data-price-ps3') + 100,
                                 'pc' => $player_card->attr('data-price-pc')
                             ],
                             'futbin_id' => $player_card->attr('data-player-id'),
@@ -187,9 +187,9 @@ class SBCPurchase extends Command {
                     $counter = 0;
                     $search_limit = Setting::get('rpm_limit');
                     do {
-
+                        $price = $price + 200;
                         $sleep_time = rand(1,8);
-                        $this->info("Sleeping for ".$sleep_time." seconds before we search for ".$player['resource_id']." - ".Carbon::now()->toDayDateTimeString());
+                        $this->info("Sleeping for ".$sleep_time." seconds before we search for ".$player['resource_id']." at ".$price." - ".Carbon::now()->toDayDateTimeString());
                         sleep($sleep_time);
                         $randomBid = rand(14000000, 15000000);
                         $formattedBid = floor($randomBid / 1000) * 1000;

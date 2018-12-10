@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'Home@index');
+Route::get('/report', 'Reports@sendReport');
+Route::get('/used', 'MostUsed@mostUsed');
 
 Route::group([
     'prefix'     => config('backpack.base.route_prefix', 'admin'),

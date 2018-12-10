@@ -164,6 +164,8 @@ return [
          * Package Service Providers...
          */
 
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -218,9 +220,11 @@ return [
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
+        'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'PagSeguro' => laravel\pagseguro\Platform\Laravel5\PagSeguro::class
 
     ],
 

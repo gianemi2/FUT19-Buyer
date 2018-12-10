@@ -73,6 +73,30 @@ class SettingsTableSeeder extends Seeder
             'field'         => '{"name":"value","label":"Value", "title":"Account cooldown" ,"type":"textarea"}',
             'active'        => 1,
         ],
+        [
+            'key'           => 'account_name',
+            'name'          => 'Account name',
+            'description'   => 'Name of account reported on notification.',
+            'value'         => 'Fut buyer',
+            'field'         => '{"name":"value","label":"Value", "title":"Account name" ,"type":"textarea"}',
+            'active'        => 1,
+        ],
+        [
+            'key'           => 'telegram_id',
+            'name'          => 'Telegram Id',
+            'description'   => 'Telegram chat id for notification',
+            'value'         => '',
+            'field'         => '{"name":"value","label":"Value", "title":"Telegram id" ,"type":"text"}',
+            'active'        => 1,
+        ],
+        [
+            'key'           => 'autoseller',
+            'name'          => 'Auto sell cards',
+            'description'   => 'Set to true if you want to auto sell bought cards.	',
+            'value'         => '1',
+            'field'         => '{"name":"value","label":"Value", "title":"Auto sell cards" ,"type":"select_from_array", "options":{"0":"Disabled","1":"Enabled"}}',
+            'active'        => 1,
+        ]
     ];
 
     /**

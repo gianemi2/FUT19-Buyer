@@ -9,6 +9,8 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\Http\Controllers\TelegramBotController;
+use Backpack\Settings\app\Models\Setting;
 
 class CardSold implements ShouldBroadcast
 {
@@ -35,6 +37,8 @@ class CardSold implements ShouldBroadcast
      */
     public function broadcastWith()
     {
+        $telegram = new TelegramBotController;
+        $telegram->sendMessage('*'.Setting::get('account_name').'* sold ' .$this->transaction->player->name.' , '. (($this->transaction->sell_bin * 0.95) - $this->transaction->buy_bin), true );
         return [
             'player_name' => $this->transaction->player->name,
             'sold_for' => $this->transaction->sell_bin,

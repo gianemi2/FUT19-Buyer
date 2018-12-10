@@ -14,8 +14,10 @@
         "fideloper/proxy": "^4.0",
         "gpressutto5/laravel-slack": "^1.0",
         "inkedcurtis/fut-api": "dev-FIFA19",
+        "irazasyed/telegram-bot-sdk": "^2.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "michael/laravelpagseguro": "dev-master",
         "muhamadrezaar/highcharts": "^2.0",
         "pusher/pusher-php-server": "^3.2"
     },

@@ -1,5 +1,4 @@
 @extends('backpack::layout')
-
 @section('header')
     <section class="content-header">
         <h1>
