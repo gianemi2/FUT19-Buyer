@@ -1,0 +1,3 @@
+RedirectMatch 403 ^/admin/register
+RedirectMatch 403 ^/admin/register/*
+RedirectMatch 403 ^/admin/password

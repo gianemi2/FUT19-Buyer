@@ -7,6 +7,7 @@
 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/transactions') }}"><i class="fa fa-history"></i> <span>{{ trans('sidebar.transactions') }}</span></a></li>
 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/accounts') }}"><i class="fa fa-address-book-o"></i> <span>{{ trans('sidebar.accounts') }}</span></a></li>
 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/setting') }}"><i class="fa fa-cog"></i> <span>{{ trans('sidebar.settings') }}</span></a></li>
+<li><a href='/used'><i class='fa fa-futbol-o'></i> <span>SBC</span></a></li>
 <li><a href='{{ url(config('backpack.base.route_prefix', 'admin').'/log') }}'><i class='fa fa-terminal'></i> <span>Logs</span></a></li>
 
 
