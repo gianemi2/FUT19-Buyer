@@ -278,6 +278,10 @@ class RunBuy extends Command {
                                         } else {
                                             // Found too many auctions
                                             $telegram->sendMessage('*'.Setting::get('account_name').'* has found too many '.$player->name.'. Check if price is correct.');
+                                            Accounts::find($this->account->id)->update([
+                                                'in_use' => '0'
+                                            ]);
+                                            abort(403);
                                         }
                                     }
                                     $counter++;
