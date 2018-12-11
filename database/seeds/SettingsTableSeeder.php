@@ -96,6 +96,14 @@ class SettingsTableSeeder extends Seeder
             'value'         => '1',
             'field'         => '{"name":"value","label":"Value", "title":"Auto sell cards" ,"type":"select_from_array", "options":{"0":"Disabled","1":"Enabled"}}',
             'active'        => 1,
+        ],
+        [
+            'key'           => 'sbc_mode',
+            'name'          => 'SBC Mode',
+            'description'   => 'In SBC mode no standard buy will be done. Only SBC ones.',
+            'value'         => '0',
+            'field'         => '{"name":"value","label":"Value", "title":"SBC" ,"type":"select_from_array", "options":{"0":"Disabled","1":"Enabled"}}',
+            'active'        => 1,
         ]
     ];
 

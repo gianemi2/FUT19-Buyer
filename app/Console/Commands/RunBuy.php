@@ -81,6 +81,9 @@ class RunBuy extends Command {
             return response(['status' => 403]);
         }
         $this->account = Accounts::where('status', '1')->where('in_use', '0')->whereNotNull('phishingToken')->first();
+        if(Setting::get('sbc_mode') == '1'){
+            abort(403);
+        }
         if(!$this->account) {
             abort(403);
         }

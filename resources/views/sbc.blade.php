@@ -1,14 +1,22 @@
+<?php
+use Illuminate\Support\Facades\DB;
+$sbcs = DB::table('sbc')->orderBy('id', 'desc')->get(); ?>
 @extends('backpack::layout')
 @section('header')
     <section class="content-header">
+        <?php if(!isset($_GET['buyList'])){ ?>
         <h1>
             SBC <small>Find most used player in SBC</small>
         </h1>
+        <?php } else { ?>
+            <h1>
+                SBC <small>Buy automatically a list of player</small>
+            </h1>
+        <?php } ?>
     </section>
 @endsection
-
-
 @section('content')
+<?php if(!isset($_GET['buyList'])){ ?>
 <div class="row">
     <div class="col-md-12">
         <div class="box box-default">
@@ -85,4 +93,79 @@
         </div>
     </div>
 </div>
+<?php } else { ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-body">
+                    <form action="/sbcpurchaser" id="sbc-purchaser" method="GET" onsubmit="return lifeSaver()">
+                        <div class="form-group">
+                            <label for="url">Inserisci l'url della squadra della SBC</label>
+                            <input required class="form-control" type="url" name="buyList" id="url" aria-describedby="sbc-help">
+                        </div>
+                        <div class="form-group">
+                            <input style="margin-right: 10px" type="checkbox" class="form-check-input" name="percentages" aria-describedby="percentages-help"><label for="percentages">Desideri usare le stesse percentuali d'acquisto settate nel bot?</label>
+                            <br />
+                            <small id="percentages-help">Spuntando quest'opzione renderai più lungo l'acquisto dei giocatori ma potresti renderlo più profittevole. Di base il bot acqusta i giocatori al prezzo di futbin o inferiore.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="increment-by">Desideri aumentare il prezzo massimo ad ogni offerta fallita?</label>
+                            <input name="incrementOffer" step="50" class="form-control" type="number" value="0" id="increment-by" aria-describedby="increment-help">
+                            <small id="increment-help">Il bot aggiungerà al prezzo di FUTBIN il valore impostato qui. Può essere utile quando viene fatta una SBC di giocatori bronzo.</small>
+                        </div>
+                        <button id="submit-button" type="submit" class="btn btn-primary">Trova</button>
+                        <script type="text/javascript">
+                            function lifeSaver(){
+                                if(confirm("ATTENZIONE. La ricerca dei giocatori tramite SBC non può essere fermata. Sei sicuro di voler far partire l'azione?")){
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            };
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-body">
+                    <h3>SBC completate</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Acquisti</th>
+                                <th>Squadra</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($sbcs as $sbc) { $class = ''; ?>
+                            <?php $repeatUrl = '/sbcpurchaser?buyList='.$sbc->url.'&percentages='.$sbc->percentages.'&incrementOffer='.$sbc->incrementBy; ?>
+                                <?php if($sbc->bought == $sbc->squadCount) $class = 'table-success'; ?>
+                                <tr class="<?php echo $class; ?>">
+                                    <td><a target="_blank" href="<?php echo $sbc->url; ?>"><?php echo $sbc->name; ?></a></td>
+                                    <td><?php echo $sbc->bought; ?></td>
+                                    <td><?php echo $sbc->squadCount; ?></td>
+                                    <td><a class="btn btn-primary" href="<?php echo $repeatUrl; ?>" role="button">Ripeti</a></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <style media="screen">
+                        .table-success{
+                            background-color: #DFF0D8!important;
+                        }
+                        .table>tbody>tr>td{
+                            vertical-align: middle;
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 @endsection

@@ -6,7 +6,7 @@
  * Time: 18:34
  */
 
-namespace App\Console\Commands;
+namespace App\Http\Controllers;
 
 use Backpack\Settings\app\Models\Setting;
 use Carbon\Carbon;
@@ -14,9 +14,12 @@ use FUTApi\Core;
 use FUTApi\FutError;
 use Illuminate\Console\Command;
 use App\Models\Accounts;
+use App\Models\Sbc;
+use Illuminate\Support\Facades\Log;
 use duzun\hQuery;
+use App\Http\Controllers\TelegramBotController;
 
-class SBCPurchase extends Command {
+class SBCPurchase extends Controller {
 
     protected $signature = 'sbc_purchase:run {solution_url : SBC URL to FUTBIN Challenge} {--percentages : Whether to use our sniping percentages to buy players}';
 
@@ -43,18 +46,21 @@ class SBCPurchase extends Command {
      */
     protected $cards = [];
 
-    /**
-     * SBCPurchase constructor.
-     */
-    public function __construct() {
-        parent::__construct();
-    }
-
-    public function handle()
+    public function purchase()
     {
-        $solution_url = $this->argument('solution_url');
-        $this->account = Accounts::where('status', '1')->where('in_use', '0')->whereNotNull('phishingToken')->first();
+        $telegram = new TelegramBotController;
+        // $solution_url = $this->argument('solution_url');
+        print_r($_GET);
+        $solution_url = $_GET['buyList'];
+        $percentages = false;
+        if(Setting::get('sbc_mode') != 1){
+            $telegram->sendMessage('*'.Setting::get('account_name')."* SBC purchaser non funziona se la SBC MODE è impostata su 1. Vai su settings e impostala su enabled.");
+            Log::info('Abort for autobuyer status active. Switch it off on SETTINGS tab.');
+            abort(403);
+        };
+        $this->account = Accounts::where('status', '1')->whereNotNull('phishingToken')->first();
         if(!$this->account) {
+            Log::info('Account non trovato');
             abort(403);
         }
         Accounts::find($this->account->id)->update([
@@ -82,6 +88,7 @@ class SBCPurchase extends Command {
             );
 
             $doc = hQuery::fromUrl($solution_url);
+            $challenge_name = $doc->find('div.chal-name > span')->text();
             $players = $doc->find('div.card > .cardetails > a');
             if($players) {
                 foreach($players as $pos => $a) {
@@ -114,9 +121,8 @@ class SBCPurchase extends Command {
             } else {
                 $this->cards['bought_players'] = json_decode(file_get_contents($bought_players_file), true);
             }
-
             if (!$filemtime or (time() - $filemtime >= $cache_life)){
-                $this->info("Please hold while we update your club contents cache.");
+                Log::info("Please hold while we update your club contents cache.");
                 $club_players = $this->fut->club();
                 $start = 0;
                 do {
@@ -145,21 +151,21 @@ class SBCPurchase extends Command {
             $collected_cards = 0;
             $required_cards = count($this->cards['players']);
 
-            if(count($this->cards['players']) === 11) {
+            if(count($this->cards['players']) > 0) {
                 foreach ($this->cards['players'] as $player) {
                     if(in_array($player['resource_id'], $this->cards['bought_players'])) {
                         $collected_cards++;
-                        $this->info("It looks like we already bought: ".$player['resource_id']);
+                        Log::info("It looks like we already bought: ".$player['resource_id']);
                         continue;
                     }
                     if(in_array($player['resource_id'], $this->cards['club_players'])) {
                         $collected_cards++;
-                        $this->info("Let's not buy: ".$player['resource_id']." as we already have it in our club");
+                        Log::info("Let's not buy: ".$player['resource_id']." as we already have it in our club");
                         continue;
                     }
                     switch($this->account->platform) {
                         case "XBOX":
-                            if($this->option('percentages') == true) {
+                            if(isset($_GET['percentages'])) {
                                 $price_arr = $prices = calculate_prices($player['prices']['xbox'], Setting::get('buy_percentage'), Setting::get('sell_percentage'));
                                 $price = $price_arr['max_bin'];
                             } else {
@@ -167,7 +173,8 @@ class SBCPurchase extends Command {
                             }
                             break;
                         case "PS4":
-                            if($this->option('percentages') == true) {
+                            if(isset($_GET['percentages'])) {
+                                $percentages = true;
                                 $price_arr = $prices = calculate_prices($player['prices']['ps'], Setting::get('buy_percentage'), Setting::get('sell_percentage'));
                                 $price = $price_arr['max_bin'];
                             } else {
@@ -175,7 +182,7 @@ class SBCPurchase extends Command {
                             }
                             break;
                         case "PC":
-                            if($this->option('percentages') == true) {
+                            if(isset($_GET['percentages'])) {
                                 $price_arr = $prices = calculate_prices($player['prices']['pc'], Setting::get('buy_percentage'), Setting::get('sell_percentage'));
                                 $price = $price_arr['max_bin'];
                             } else {
@@ -183,13 +190,16 @@ class SBCPurchase extends Command {
                             }
                             break;
                     }
-                    $this->info("We are going to search for ".$player['resource_id']." with a Max BIN of ".$price);
+                    Log::info("We are going to search for ".$player['resource_id']." with a Max BIN of ".$price);
+                    $telegram->sendMessage('*'.Setting::get('account_name')."* is going to search for ".$player['resource_id']." with a Max BIN of ".$price, true);
                     $counter = 0;
                     $search_limit = Setting::get('rpm_limit');
                     do {
-                        $price = 0;
+                        if(isset($_GET['incrementOffer'])){
+                            $price = $price + $_GET['incrementOffer'];
+                        }
                         $sleep_time = rand(1,8);
-                        $this->info("Sleeping for ".$sleep_time." seconds before we search for ".$player['resource_id']." at ".$price." - ".Carbon::now()->toDayDateTimeString());
+                        Log::info("Sleeping for ".$sleep_time." seconds before we search for ".$player['resource_id']." at ".$price." - ".Carbon::now()->toDayDateTimeString());
                         sleep($sleep_time);
                         $randomBid = rand(14000000, 15000000);
                         $formattedBid = floor($randomBid / 1000) * 1000;
@@ -212,7 +222,10 @@ class SBCPurchase extends Command {
                             $bid = $this->fut->bid($cheapest_item['tradeId'], $cheapest_item['buyNowPrice']);
                             if(isset($bid['auctionInfo'])) {
                                 $collected_cards++;
-                                $this->info("It looks like we bought ".$player['resource_id']." successfully for ".$cheapest_item['buyNowPrice']."!");
+                                Log::info("It looks like we bought ".$player['resource_id']." successfully for ".$cheapest_item['buyNowPrice']."!");
+
+                                $telegram->sendMessage('*'.Setting::get('account_name')."* bought ".$player['resource_id']." successfully for ".$cheapest_item['buyNowPrice']."!", true);
+
                                 array_push($this->cards['bought_players'], (int)$player['resource_id']);
                                 $counter = $search_limit;
                                 file_put_contents($bought_players_file, json_encode($this->cards['bought_players']));
@@ -234,17 +247,23 @@ class SBCPurchase extends Command {
             Accounts::find($this->account->id)->update([
                 'in_use' => '0'
             ]);
+            $telegram->sendMessage('*'.Setting::get('account_name'). '* We have completed a run having collected '.$collected_cards.' cards out the required '.$required_cards );
 
-            if(config('laravel-slack.slack_webhook_url') !== null) {
-                \Slack::to(config('laravel-slack.default_channel'))->send('SBCPurchaser - We have completed a run having collected '.$collected_cards.' cards out the required '.$required_cards);
-            }
+            $sbc = new Sbc;
+            $sbc->name = $challenge_name;
+            $sbc->url = $_GET['buyList'];
+            $sbc->bought = $collected_cards;
+            $sbc->squadCount = $required_cards;
+            $sbc->percentages = $percentages;
+            $sbc->incrementBy = $_GET['incrementOffer'];
+            $sbc->save();
 
         } catch(FutError $exception) {
 
             $error = $exception->GetOptions();
 
             if($error['reason'] == 'permission_denied') {
-                $this->info('We was too slow trying to snipe!');
+                Log::info('We was too slow trying to snipe!');
                 return;
             }
 
