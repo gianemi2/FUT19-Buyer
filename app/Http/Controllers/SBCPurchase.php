@@ -50,7 +50,6 @@ class SBCPurchase extends Controller {
     {
         $telegram = new TelegramBotController;
         // $solution_url = $this->argument('solution_url');
-        print_r($_GET);
         $solution_url = $_GET['buyList'];
         $percentages = false;
         if(Setting::get('sbc_mode') != 1){

@@ -133,7 +133,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -165,6 +164,8 @@ return [
          */
 
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -224,8 +225,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PagSeguro' => laravel\pagseguro\Platform\Laravel5\PagSeguro::class
-
+        'PagSeguro' => laravel\pagseguro\Platform\Laravel5\PagSeguro::class,
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
     ],
 
 ];

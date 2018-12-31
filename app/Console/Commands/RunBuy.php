@@ -390,6 +390,8 @@ class RunBuy extends Command {
                         }
                         if($auction['tradeState'] == NULL || $auction['tradeState'] == "expired"){
                             //lets sell
+                            Log::info($auction);
+                            Log::info($trade);
                             $sale = $this->fut->sell($trade->card_id, $sell_bid, $sell_bin);
                             $trade->listed_bin = $sell_bin;
                             $trade->listed_time = new Carbon;
