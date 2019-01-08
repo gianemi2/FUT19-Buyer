@@ -15,6 +15,7 @@ class CreateSbcTable extends Migration
     {
         Schema::create('sbc', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('url');
             $table->string('bought');
             $table->string('squadCount');

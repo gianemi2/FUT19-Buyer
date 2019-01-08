@@ -16,7 +16,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        return Accounts::get(['id','platform', 'personaName', 'tradepile_cards', 'tradepile_value', 'coins', 'status', 'status_reason']);
+        return Accounts::get(['id','platform', 'personaName', 'tradepile_cards', 'tradepile_value', 'coins', 'status', 'status_reason'])->first();
     }
 
     /**

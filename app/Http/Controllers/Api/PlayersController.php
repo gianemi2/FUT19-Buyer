@@ -23,6 +23,7 @@ class PlayersController extends Controller
         // $players['trashed'] =  Players::withTrashed()->get();
         // $players['active']  =  Players::get();
         return Players::get();
+        // return Players::withTrashed()->get();
     }
 
     public function all()
