@@ -58,12 +58,12 @@ class SBCPurchase extends Controller {
         $percentages = false;
         if(Setting::get('sbc_mode') != 1){
             $telegram->sendMessage('*'.Setting::get('account_name')."* SBC purchaser non funziona se la SBC MODE è impostata su 1. Vai su settings e impostala su enabled.");
-            // Log::info('Abort for autobuyer status active. Switch it off on SETTINGS tab.');
+            // // Log::info('Abort for autobuyer status active. Switch it off on SETTINGS tab.');
             abort(403);
         };
         $this->account = Accounts::where('status', '1')->whereNotNull('phishingToken')->first();
         if(!$this->account) {
-            // Log::info('Account non trovato');
+            // // Log::info('Account non trovato');
             abort(403);
         }
         Accounts::find($this->account->id)->update([
@@ -96,572 +96,1430 @@ class SBCPurchase extends Controller {
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '700',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 825,
-                            'base_id' => 183900,
-                            'resource_id' => 183900,
-                            'rating' => 81,
+                            'futbin_id' => '3204',
+                            'resource_id' => '200726',
+                            'base_id' => '200726',
+                            'rating' => '81',
                         ),
                         1 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2501,
-                            'base_id' => 196978,
-                            'resource_id' => 196978,
-                            'rating' => 78,
+                            'futbin_id' => '451',
+                            'resource_id' => '186569',
+                            'base_id' => '186569',
+                            'rating' => '80',
                         ),
                         2 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1165,
-                            'base_id' => 190972,
-                            'resource_id' => 190972,
-                            'rating' => 81,
+                            'futbin_id' => '1467',
+                            'resource_id' => '177683',
+                            'base_id' => '177683',
+                            'rating' => '82',
                         ),
                         3 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2658,
-                            'base_id' => 138699,
-                            'resource_id' => 138699,
-                            'rating' => 77,
+                            'futbin_id' => '1495',
+                            'resource_id' => '192984',
+                            'base_id' => '192984',
+                            'rating' => '82',
                         ),
                         4 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 788,
-                            'base_id' => 198031,
-                            'resource_id' => 198031,
-                            'rating' => 79,
+                            'futbin_id' => '1551',
+                            'resource_id' => '203042',
+                            'base_id' => '203042',
+                            'rating' => '81',
                         ),
                         5 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 4842,
-                            'base_id' => 231969,
-                            'resource_id' => 231969,
-                            'rating' => 76,
+                            'futbin_id' => '1812',
+                            'resource_id' => '188943',
+                            'base_id' => '188943',
+                            'rating' => '80',
                         ),
                         6 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 3046,
-                            'base_id' => 177553,
-                            'resource_id' => 177553,
-                            'rating' => 75,
+                            'futbin_id' => '2054',
+                            'resource_id' => '226753',
+                            'base_id' => '226753',
+                            'rating' => '78',
                         ),
                         7 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2498,
-                            'base_id' => 208920,
-                            'resource_id' => 208920,
-                            'rating' => 79,
+                            'futbin_id' => '2179',
+                            'resource_id' => '104389',
+                            'base_id' => '104389',
+                            'rating' => '82',
                         ),
                         8 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 4820,
-                            'base_id' => 212219,
-                            'resource_id' => 212219,
-                            'rating' => 76,
+                            'futbin_id' => '2303',
+                            'resource_id' => '182494',
+                            'base_id' => '182494',
+                            'rating' => '81',
                         ),
                         9 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 5125,
-                            'base_id' => 210625,
-                            'resource_id' => 210625,
-                            'rating' => 76,
+                            'futbin_id' => '2474',
+                            'resource_id' => '148119',
+                            'base_id' => '148119',
+                            'rating' => '80',
                         ),
                         10 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2303,
-                            'base_id' => 182494,
-                            'resource_id' => 182494,
-                            'rating' => 81,
+                            'futbin_id' => '1172',
+                            'resource_id' => '194022',
+                            'base_id' => '194022',
+                            'rating' => '79',
                         ),
                         11 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 700,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 13477,
-                            'base_id' => 238794,
-                            'resource_id' => 238794,
-                            'rating' => 77,
+                            'futbin_id' => '1690',
+                            'resource_id' => '189681',
+                            'base_id' => '189681',
+                            'rating' => '79',
                         ),
                         12 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1976,
-                            'base_id' => 207791,
-                            'resource_id' => 207791,
-                            'rating' => 77,
+                            'futbin_id' => '5125',
+                            'resource_id' => '210625',
+                            'base_id' => '210625',
+                            'rating' => '76',
                         ),
                         13 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '800',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2052,
-                            'base_id' => 236632,
-                            'resource_id' => 236632,
-                            'rating' => 79,
+                            'futbin_id' => '201',
+                            'resource_id' => '173771',
+                            'base_id' => '173771',
+                            'rating' => '81',
                         ),
                         14 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 700,
+                                'ps' => '800',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 4805,
-                            'base_id' => 214770,
-                            'resource_id' => 214770,
-                            'rating' => 76,
+                            'futbin_id' => '233',
+                            'resource_id' => '235212',
+                            'base_id' => '235212',
+                            'rating' => '75',
                         ),
                         15 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 700,
+                                'ps' => '800',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 12395,
-                            'base_id' => 169051,
-                            'resource_id' => 169051,
-                            'rating' => 76,
+                            'futbin_id' => '623',
+                            'resource_id' => '234035',
+                            'base_id' => '234035',
+                            'rating' => '80',
                         ),
                         16 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '800',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 12916,
-                            'base_id' => 180432,
-                            'resource_id' => 180432,
-                            'rating' => 78,
+                            'futbin_id' => '641',
+                            'resource_id' => '180216',
+                            'base_id' => '180216',
+                            'rating' => '80',
                         ),
                         17 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '800',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 951,
-                            'base_id' => 211385,
-                            'resource_id' => 211385,
-                            'rating' => 76,
+                            'futbin_id' => '707',
+                            'resource_id' => '205965',
+                            'base_id' => '205965',
+                            'rating' => '76',
                         ),
                         18 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '800',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 13278,
-                            'base_id' => 220477,
-                            'resource_id' => 220477,
-                            'rating' => 80,
+                            'futbin_id' => '930',
+                            'resource_id' => '204259',
+                            'base_id' => '204259',
+                            'rating' => '78',
                         ),
                         19 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '800',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2050,
-                            'base_id' => 190815,
-                            'resource_id' => 190815,
-                            'rating' => 79,
+                            'futbin_id' => '1034',
+                            'resource_id' => '206591',
+                            'base_id' => '206591',
+                            'rating' => '78',
                         ),
                         20 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '650',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 930,
-                            'base_id' => 204259,
-                            'resource_id' => 204259,
-                            'rating' => 78,
+                            'futbin_id' => '5715',
+                            'resource_id' => '183606',
+                            'base_id' => '183606',
+                            'rating' => '75',
                         ),
                         21 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '700',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1047,
-                            'base_id' => 215316,
-                            'resource_id' => 215316,
-                            'rating' => 81,
+                            'futbin_id' => '2595',
+                            'resource_id' => '184477',
+                            'base_id' => '184477',
+                            'rating' => '78',
                         ),
                         22 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 700,
+                                'ps' => '700',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 13285,
-                            'base_id' => 223061,
-                            'resource_id' => 223061,
-                            'rating' => 80,
+                            'futbin_id' => '2964',
+                            'resource_id' => '213899',
+                            'base_id' => '213899',
+                            'rating' => '76',
                         ),
                         23 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '700',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1977,
-                            'base_id' => 225713,
-                            'resource_id' => 225713,
-                            'rating' => 76,
+                            'futbin_id' => '13279',
+                            'resource_id' => '221540',
+                            'base_id' => '221540',
+                            'rating' => '80',
                         ),
                         24 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '700',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 3471,
-                            'base_id' => 213956,
-                            'resource_id' => 213956,
-                            'rating' => 75,
+                            'futbin_id' => '13519',
+                            'resource_id' => '195860',
+                            'base_id' => '195860',
+                            'rating' => '76',
                         ),
                         25 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 778,
-                            'base_id' => 156519,
-                            'resource_id' => 156519,
-                            'rating' => 81,
+                            'futbin_id' => '174',
+                            'resource_id' => '211320',
+                            'base_id' => '211320',
+                            'rating' => '82',
                         ),
                         26 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 375,
-                            'base_id' => 205192,
-                            'resource_id' => 205192,
-                            'rating' => 79,
+                            'futbin_id' => '650',
+                            'resource_id' => '220523',
+                            'base_id' => '220523',
+                            'rating' => '78',
                         ),
                         27 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 3257,
-                            'base_id' => 237239,
-                            'resource_id' => 237239,
-                            'rating' => 78,
+                            'futbin_id' => '669',
+                            'resource_id' => '210413',
+                            'base_id' => '210413',
+                            'rating' => '82',
                         ),
                         28 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1822,
-                            'base_id' => 205995,
-                            'resource_id' => 205995,
-                            'rating' => 76,
+                            'futbin_id' => '673',
+                            'resource_id' => '186547',
+                            'base_id' => '186547',
+                            'rating' => '80',
                         ),
                         29 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 994,
-                            'base_id' => 166706,
-                            'resource_id' => 166706,
-                            'rating' => 81,
+                            'futbin_id' => '943',
+                            'resource_id' => '216655',
+                            'base_id' => '216655',
+                            'rating' => '78',
                         ),
                         30 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 700,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 13519,
-                            'base_id' => 195860,
-                            'resource_id' => 195860,
-                            'rating' => 76,
+                            'futbin_id' => '1028',
+                            'resource_id' => '177458',
+                            'base_id' => '177458',
+                            'rating' => '81',
                         ),
                         31 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1172,
-                            'base_id' => 194022,
-                            'resource_id' => 194022,
-                            'rating' => 79,
+                            'futbin_id' => '1108',
+                            'resource_id' => '202935',
+                            'base_id' => '202935',
+                            'rating' => '79',
                         ),
                         32 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2474,
-                            'base_id' => 148119,
-                            'resource_id' => 148119,
-                            'rating' => 80,
+                            'futbin_id' => '1251',
+                            'resource_id' => '192641',
+                            'base_id' => '192641',
+                            'rating' => '80',
                         ),
                         33 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 4378,
-                            'base_id' => 176376,
-                            'resource_id' => 176376,
-                            'rating' => 80,
+                            'futbin_id' => '2106',
+                            'resource_id' => '188829',
+                            'base_id' => '188829',
+                            'rating' => '80',
                         ),
                         34 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 700,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2684,
-                            'base_id' => 202851,
-                            'resource_id' => 202851,
-                            'rating' => 76,
+                            'futbin_id' => '2688',
+                            'resource_id' => '226536',
+                            'base_id' => '226536',
+                            'rating' => '75',
                         ),
                         35 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2400,
-                            'base_id' => 229167,
-                            'resource_id' => 229167,
-                            'rating' => 76,
+                            'futbin_id' => '3064',
+                            'resource_id' => '199393',
+                            'base_id' => '199393',
+                            'rating' => '77',
                         ),
                         36 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 3464,
-                            'base_id' => 162347,
-                            'resource_id' => 162347,
-                            'rating' => 81,
+                            'futbin_id' => '3091',
+                            'resource_id' => '208615',
+                            'base_id' => '208615',
+                            'rating' => '75',
                         ),
                         37 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2817,
-                            'base_id' => 190875,
-                            'resource_id' => 190875,
-                            'rating' => 79,
+                            'futbin_id' => '4269',
+                            'resource_id' => '194201',
+                            'base_id' => '194201',
+                            'rating' => '76',
                         ),
                         38 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1029,
-                            'base_id' => 199042,
-                            'resource_id' => 199042,
-                            'rating' => 81,
+                            'futbin_id' => '13278',
+                            'resource_id' => '220477',
+                            'base_id' => '220477',
+                            'rating' => '80',
                         ),
                         39 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 850,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1501,
-                            'base_id' => 202562,
-                            'resource_id' => 202562,
-                            'rating' => 78,
+                            'futbin_id' => '13515',
+                            'resource_id' => '193869',
+                            'base_id' => '193869',
+                            'rating' => '76',
                         ),
                         40 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2106,
-                            'base_id' => 188829,
-                            'resource_id' => 188829,
-                            'rating' => 80,
+                            'futbin_id' => '539',
+                            'resource_id' => '205923',
+                            'base_id' => '205923',
+                            'rating' => '81',
                         ),
                         41 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 1946,
-                            'base_id' => 229773,
-                            'resource_id' => 229773,
-                            'rating' => 77,
+                            'futbin_id' => '951',
+                            'resource_id' => '211385',
+                            'base_id' => '211385',
+                            'rating' => '76',
                         ),
                         42 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 800,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 623,
-                            'base_id' => 234035,
-                            'resource_id' => 234035,
-                            'rating' => 80,
+                            'futbin_id' => '1143',
+                            'resource_id' => '212491',
+                            'base_id' => '212491',
+                            'rating' => '76',
                         ),
                         43 =>
                         array (
                             'prices' =>
                             array (
                                 'xbox' => 0,
-                                'ps' => 750,
+                                'ps' => '750',
                                 'pc' => 0,
                             ),
-                            'futbin_id' => 2022,
-                            'base_id' => 142902,
-                            'resource_id' => 142902,
-                            'rating' => 78,
+                            'futbin_id' => '2184',
+                            'resource_id' => '192557',
+                            'base_id' => '192557',
+                            'rating' => '78',
+                        ),
+                        44 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '224',
+                            'resource_id' => '209889',
+                            'base_id' => '209889',
+                            'rating' => '78',
+                        ),
+                        45 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '280',
+                            'resource_id' => '205988',
+                            'base_id' => '205988',
+                            'rating' => '78',
+                        ),
+                        46 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '325',
+                            'resource_id' => '183427',
+                            'base_id' => '183427',
+                            'rating' => '80',
+                        ),
+                        47 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '504',
+                            'resource_id' => '205566',
+                            'base_id' => '205566',
+                            'rating' => '77',
+                        ),
+                        48 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '541',
+                            'resource_id' => '169595',
+                            'base_id' => '169595',
+                            'rating' => '80',
+                        ),
+                        49 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '573',
+                            'resource_id' => '177604',
+                            'base_id' => '177604',
+                            'rating' => '80',
+                        ),
+                        50 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '650',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3786',
+                            'resource_id' => '224574',
+                            'base_id' => '224574',
+                            'rating' => '75',
+                        ),
+                        51 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2324',
+                            'resource_id' => '124607',
+                            'base_id' => '124607',
+                            'rating' => '75',
+                        ),
+                        52 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3937',
+                            'resource_id' => '207412',
+                            'base_id' => '207412',
+                            'rating' => '76',
+                        ),
+                        53 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '4805',
+                            'resource_id' => '214770',
+                            'base_id' => '214770',
+                            'rating' => '76',
+                        ),
+                        54 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '375',
+                            'resource_id' => '205192',
+                            'base_id' => '205192',
+                            'rating' => '79',
+                        ),
+                        55 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1029',
+                            'resource_id' => '199042',
+                            'base_id' => '199042',
+                            'rating' => '81',
+                        ),
+                        56 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1218',
+                            'resource_id' => '225663',
+                            'base_id' => '225663',
+                            'rating' => '79',
+                        ),
+                        57 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2065',
+                            'resource_id' => '172143',
+                            'base_id' => '172143',
+                            'rating' => '76',
+                        ),
+                        58 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2081',
+                            'resource_id' => '212886',
+                            'base_id' => '212886',
+                            'rating' => '78',
+                        ),
+                        59 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2761',
+                            'resource_id' => '230965',
+                            'base_id' => '230965',
+                            'rating' => '75',
+                        ),
+                        60 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3464',
+                            'resource_id' => '162347',
+                            'base_id' => '162347',
+                            'rating' => '81',
+                        ),
+                        61 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3952',
+                            'resource_id' => '216451',
+                            'base_id' => '216451',
+                            'rating' => '82',
+                        ),
+                        62 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '4842',
+                            'resource_id' => '231969',
+                            'base_id' => '231969',
+                            'rating' => '76',
+                        ),
+                        63 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '4863',
+                            'resource_id' => '174549',
+                            'base_id' => '174549',
+                            'rating' => '75',
+                        ),
+                        64 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '5244',
+                            'resource_id' => '193425',
+                            'base_id' => '193425',
+                            'rating' => '75',
+                        ),
+                        65 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '12395',
+                            'resource_id' => '169051',
+                            'base_id' => '169051',
+                            'rating' => '76',
+                        ),
+                        66 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '195',
+                            'resource_id' => '192318',
+                            'base_id' => '192318',
+                            'rating' => '82',
+                        ),
+                        67 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '196',
+                            'resource_id' => '177413',
+                            'base_id' => '177413',
+                            'rating' => '82',
+                        ),
+                        68 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '212',
+                            'resource_id' => '193283',
+                            'base_id' => '193283',
+                            'rating' => '79',
+                        ),
+                        69 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '263',
+                            'resource_id' => '191740',
+                            'base_id' => '191740',
+                            'rating' => '82',
+                        ),
+                        70 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '552',
+                            'resource_id' => '183394',
+                            'base_id' => '183394',
+                            'rating' => '76',
+                        ),
+                        71 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '678',
+                            'resource_id' => '230938',
+                            'base_id' => '230938',
+                            'rating' => '78',
+                        ),
+                        72 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '788',
+                            'resource_id' => '198031',
+                            'base_id' => '198031',
+                            'rating' => '79',
+                        ),
+                        73 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1449',
+                            'resource_id' => '177600',
+                            'base_id' => '177600',
+                            'rating' => '80',
+                        ),
+                        74 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1478',
+                            'resource_id' => '229261',
+                            'base_id' => '229261',
+                            'rating' => '77',
+                        ),
+                        75 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1500',
+                            'resource_id' => '206511',
+                            'base_id' => '206511',
+                            'rating' => '78',
+                        ),
+                        76 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1585',
+                            'resource_id' => '189251',
+                            'base_id' => '189251',
+                            'rating' => '81',
+                        ),
+                        77 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1702',
+                            'resource_id' => '235569',
+                            'base_id' => '235569',
+                            'rating' => '78',
+                        ),
+                        78 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1967',
+                            'resource_id' => '195365',
+                            'base_id' => '195365',
+                            'rating' => '82',
+                        ),
+                        79 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '800',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2060',
+                            'resource_id' => '228702',
+                            'base_id' => '228702',
+                            'rating' => '77',
+                        ),
+                        80 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1165',
+                            'resource_id' => '190972',
+                            'base_id' => '190972',
+                            'rating' => '81',
+                        ),
+                        81 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1175',
+                            'resource_id' => '216547',
+                            'base_id' => '216547',
+                            'rating' => '79',
+                        ),
+                        82 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '4451',
+                            'resource_id' => '199151',
+                            'base_id' => '199151',
+                            'rating' => '76',
+                        ),
+                        83 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '13282',
+                            'resource_id' => '221992',
+                            'base_id' => '221992',
+                            'rating' => '80',
+                        ),
+                        84 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '396',
+                            'resource_id' => '189505',
+                            'base_id' => '189505',
+                            'rating' => '82',
+                        ),
+                        85 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1450',
+                            'resource_id' => '189354',
+                            'base_id' => '189354',
+                            'rating' => '80',
+                        ),
+                        86 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2052',
+                            'resource_id' => '236632',
+                            'base_id' => '236632',
+                            'rating' => '79',
+                        ),
+                        87 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2400',
+                            'resource_id' => '229167',
+                            'base_id' => '229167',
+                            'rating' => '76',
+                        ),
+                        88 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3471',
+                            'resource_id' => '213956',
+                            'base_id' => '213956',
+                            'rating' => '75',
+                        ),
+                        89 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '7318',
+                            'resource_id' => '236245',
+                            'base_id' => '236245',
+                            'rating' => '75',
+                        ),
+                        90 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '786',
+                            'resource_id' => '227476',
+                            'base_id' => '227476',
+                            'rating' => '79',
+                        ),
+                        91 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1073',
+                            'resource_id' => '199451',
+                            'base_id' => '199451',
+                            'rating' => '81',
+                        ),
+                        92 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1133',
+                            'resource_id' => '190717',
+                            'base_id' => '190717',
+                            'rating' => '78',
+                        ),
+                        93 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1503',
+                            'resource_id' => '223689',
+                            'base_id' => '223689',
+                            'rating' => '77',
+                        ),
+                        94 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1762',
+                            'resource_id' => '204529',
+                            'base_id' => '204529',
+                            'rating' => '81',
+                        ),
+                        95 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1765',
+                            'resource_id' => '176600',
+                            'base_id' => '176600',
+                            'rating' => '81',
+                        ),
+                        96 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1815',
+                            'resource_id' => '205693',
+                            'base_id' => '205693',
+                            'rating' => '78',
+                        ),
+                        97 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1913',
+                            'resource_id' => '189963',
+                            'base_id' => '189963',
+                            'rating' => '76',
+                        ),
+                        98 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1976',
+                            'resource_id' => '207791',
+                            'base_id' => '207791',
+                            'rating' => '77',
+                        ),
+                        99 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1977',
+                            'resource_id' => '225713',
+                            'base_id' => '225713',
+                            'rating' => '76',
+                        ),
+                        100 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '825',
+                            'resource_id' => '183900',
+                            'base_id' => '183900',
+                            'rating' => '81',
+                        ),
+                        101 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1535',
+                            'resource_id' => '164985',
+                            'base_id' => '164985',
+                            'rating' => '76',
+                        ),
+                        102 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2843',
+                            'resource_id' => '210463',
+                            'base_id' => '210463',
+                            'rating' => '75',
+                        ),
+                        103 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3233',
+                            'resource_id' => '204077',
+                            'base_id' => '204077',
+                            'rating' => '77',
+                        ),
+                        104 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3805',
+                            'resource_id' => '188268',
+                            'base_id' => '188268',
+                            'rating' => '77',
+                        ),
+                        105 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '7695',
+                            'resource_id' => '232862',
+                            'base_id' => '232862',
+                            'rating' => '77',
+                        ),
+                        106 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '700',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '13253',
+                            'resource_id' => '208128',
+                            'base_id' => '208128',
+                            'rating' => '80',
+                        ),
+                        107 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '1760',
+                            'resource_id' => '224411',
+                            'base_id' => '224411',
+                            'rating' => '82',
+                        ),
+                        108 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '2924',
+                            'resource_id' => '224218',
+                            'base_id' => '224218',
+                            'rating' => '75',
+                        ),
+                        109 =>
+                        array (
+                            'prices' =>
+                            array (
+                                'xbox' => 0,
+                                'ps' => '750',
+                                'pc' => 0,
+                            ),
+                            'futbin_id' => '3309',
+                            'resource_id' => '196143',
+                            'base_id' => '196143',
+                            'rating' => '76',
                         ),
                     );
                 } else {
@@ -735,12 +1593,12 @@ class SBCPurchase extends Controller {
 
                         if(in_array($player['resource_id'], $this->cards['bought_players'])) {
                             $collected_cards++;
-                            Log::info("It looks like we already bought: ".$player['resource_id']);
+                            // Log::info("It looks like we already bought: ".$player['resource_id']);
                             continue;
                         }
                         if(in_array($player['resource_id'], $this->cards['club_players'])) {
                             $collected_cards++;
-                            Log::info("Let's not buy: ".$player['resource_id']." as we already have it in our club");
+                            // Log::info("Let's not buy: ".$player['resource_id']." as we already have it in our club");
                             continue;
                         }
 
@@ -779,7 +1637,9 @@ class SBCPurchase extends Controller {
                             if(isset($_GET['incrementOffer'])){
                                 $price = $price + $_GET['incrementOffer'];
                             } else if(isset($_GET['toty'])){
-                                $price = $price + '25';
+                                if( $counter > ($search_limit / 2) ){
+                                    $price = $price + '100';
+                                }
                             }
                             $sleep_time = rand(1,8);
                             // Log::info("Sleeping for ".$sleep_time." seconds before we search for ".$player['resource_id']." at ".$price." - ".Carbon::now()->toDayDateTimeString());
@@ -831,6 +1691,18 @@ class SBCPurchase extends Controller {
                     'in_use' => '0'
                 ]);
                 $telegram->sendMessage('*'.Setting::get('account_name'). '* We have completed a run having collected '.$collected_cards.' cards out the required '.$required_cards );
+
+                if($collected_cards == $required_cards){
+                    $bought_players_file = unlink($bought_players_file);
+                    $cache_file = unlink($cache_file);
+
+                    if($bought_players_file){
+                        // Log::info('Bought players deleted');
+                    }
+                    if($cache_file){
+                        // Log::info('Club players deleted');
+                    }
+                }
 
                 $sbc = new Sbc;
                 $sbc->name = $challenge_name;
